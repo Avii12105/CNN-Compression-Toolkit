@@ -1,0 +1,80 @@
+project:
+  name: cnn-compression-toolkit
+  seed: 20261024
+
+model:
+  architecture: vgg16_bn
+  checkpoint: ../checkpoints/vgg16_bn_cifar10.pt
+  checkpoint_format: state_dict
+  num_classes: 10
+  input_shape: [1, 3, 32, 32]
+
+dataset:
+  root: ../data/cifar10
+  calibration_size: 512
+  calibration_sampling: fixed-seed
+  calibration_seed: 20261024
+  validation_size: 5000
+  download: false
+  normalization:
+    mean: [0.4914, 0.4822, 0.4465]
+    std: [0.2470, 0.2435, 0.2616]
+  train_split: train
+  test_split: test
+
+evaluation:
+  batch_size: 128
+  num_workers: 2
+
+runtime:
+  device: auto
+  allow_cpu_fallback: true
+
+benchmark:
+  provider: CPUExecutionProvider
+  batch_size: 1
+  intra_op_threads: 1
+  inter_op_threads: 1
+  warmup_runs: 50
+  timed_runs: 200
+
+onnx:
+  opset: 18
+  export_mode: torch_onnx
+  input_name: input
+  output_name: logits
+  input_shape: [1, 3, 32, 32]
+  rtol: 1.0e-03
+  atol: 1.0e-04
+
+output:
+  artifact_root: ../artifacts
+
+logging:
+  level: INFO
+  capture_environment: true
+
+compression:
+  default_pruning_ratio: 0.0
+  default_precision: fp32
+  run_distillation: false
+  distillation_target_accuracy: null
+  distillation_alpha: 0.3
+  distillation_temperature: 4.0
+  distillation_learning_rate: 0.001
+  protection_gamma: 0.5
+  protected_layers_count: 4
+  simd_alignment: 8
+  ratio_clamp_max: 0.9
+
+quantization:
+  precision: auto
+  calibration_size: 512
+  qdq: true
+  per_channel: true
+
+search:
+  budget_latency_ms: null
+  budget_max_accuracy_drop: null
+  budget_min_accuracy: null
+  budget_max_size_bytes: null
