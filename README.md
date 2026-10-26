@@ -320,28 +320,3 @@ uv run pytest
 # Run only unit tests (fast, no external assets)
 uv run pytest -m "not integration"
 ```
-
-## Continuous Integration
-
-CI runs on every push and pull request, executing `ruff check`, `ruff format --check`, and the full test suite.
-
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on contributing to the project.
-
-## License
-
-This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
-
-## Citation
-
-If you use this toolkit in your research, please cite:
-
-```bibtex
-@software{cnn-compression-toolkit,
-  title = {CNN Compression Toolkit},
-  author = {Your Name},
-  year = {2026},
-  url = {https://github.com/your-username/cnn-compression-toolkit}
-}
-```
