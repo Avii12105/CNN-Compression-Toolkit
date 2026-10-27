@@ -117,8 +117,8 @@ The project uses [`uv`](https://github.com/astral-sh/uv) for fast, reliable Pyth
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/cnn-compression-toolkit.git
-cd cnn-compression-toolkit
+git clone https://github.com/Avii12105/CNN-Compression-Toolkit.git
+cd CNN-Compression-Toolkit
 
 # Create the virtual environment and install dependencies
 uv venv --python 3.11
